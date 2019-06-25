@@ -4,7 +4,7 @@ import csv
 import overpass
 
 api = overpy.Overpass()
-fobj=open("Chennai_Parks.csv","w")
+fobj=open("Chennai_Parks2.csv","w")
 fobj.write("Park in Chennai")
 id="ID"
 name="NAME"
@@ -15,7 +15,18 @@ results = api.query("""[out:json][timeout:25];
 """)
 for way in results.nodes:
     Name=way.tags.get("name")
-    if Name==None:
+    if Name is  None:
+        Name="None"
+    Id=way.id
+    id=str(Id)
+    print(Name)
+    print(id)
+    inp=(id+","+Name)
+    fobj.write('\n'+inp)
+
+for way in results.ways:
+    Name=way.tags.get("name")
+    if Name is  None:
         Name="None"
     Id=way.id
     id=str(Id)
